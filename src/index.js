@@ -3,11 +3,14 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
 import Counter from './components/Counter';
 import counter from './reducers';
 
-const store = createStore(counter);
+import createLogger from 'redux-logger';
+
+const logger=createLogger();
+const store = createStore(counter,applyMiddleware(logger));
 const rootEl = document.getElementById('root');
 const render = () => ReactDOM.render(
     <Counter
